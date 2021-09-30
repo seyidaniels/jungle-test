@@ -6,12 +6,14 @@
           :items="months"
           label="Start Month"
           v-model="startMonth"
+          color="#AEAEBA"
         ></v-select>
         <p>to</p>
          <v-select
           :items="months"
           label="End Month"
             v-model="endMonth"
+            color="#AEAEBA"
         ></v-select>
         </v-row>
     </div>
