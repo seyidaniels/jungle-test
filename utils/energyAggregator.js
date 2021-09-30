@@ -13,7 +13,12 @@ const getAvailability = (produced, lost) => {
 }
 
 
-const getMonthName = (index) => {
+
+/**
+ * gets Month index in constant time
+ *
+ * @var {[type]}
+ */const getMonthName = (index) => {
     const months = ["January","February","March","April","May","June","July",
     "August","September","October","November","December"]
     return months[index]
@@ -43,6 +48,13 @@ const getMonthName = (index) => {
     return turbines
 }
 
+/**
+ * Gets worst Torbine based on a list of days object
+ *
+ * @param   {[] Object}  days  [days object for a month]
+ *
+ * @return  {String}        Name of the worst torbine
+ */
 const worstTurbine = (days) => {
     const turbines = aggregateTurbines(days)
     let worstTurbine = ''
@@ -60,7 +72,15 @@ const worstTurbine = (days) => {
 
 
 
-const getMonthlyData = (apiData) => {
+
+/**
+ * Calculates Monthly Data based on data returned from api, each month object contains energyProduced, energyLost, availability
+ *
+ * @param   {Object}  months         [months description]
+ * @param   {Object}  currentObject  [currentObject description]
+ *
+ * @return  {Object}                 months Object
+ */const getMonthlyData = (apiData) => {
     const monthlyData = apiData.reduce((months, currentObject) => {
         const currentDate = new Date(currentObject.bucket)
         const currentMonth = currentDate.getMonth()
@@ -89,4 +109,4 @@ const getMonthlyData = (apiData) => {
 }
 
 
-export {getMonthlyData, worstTurbine}
+export {getMonthlyData}
