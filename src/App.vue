@@ -7,10 +7,9 @@
         </v-col>
       </v-row>
 
-      <v-row class='mt-100' v-if="monthsHasData"> 
+      <v-row class='mt-100'> 
           <month-component v-for="(month, index) in monthsData" :month='month' :key='index'></month-component>
       </v-row>
-      <h1 v-if="!monthsHasData" class='mt-10'>Select Months to return power metrics</h1>
       <v-overlay :value="loading">
       <v-progress-circular
         indeterminate
