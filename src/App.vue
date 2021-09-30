@@ -52,7 +52,7 @@ export default {
         try {
           const response = await axios.get(url) 
           const monthlyData = getMonthlyData(response.data)
-          this.monthsData = {...monthlyData}
+            this.monthsData = {...monthlyData}
         }catch (error) {
           alert(error.message)
         }

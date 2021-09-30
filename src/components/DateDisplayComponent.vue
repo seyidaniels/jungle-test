@@ -29,9 +29,17 @@ export default {
         }
     }, 
     watch: {
-        endMonth(value) {
-            if (value && this.startMonth) {
-                //TODO make this 0(1) time complexity
+        startMonth() {
+            this.emitDates()
+        },
+        endMonth() {
+            this.emitDates()
+        } 
+    },
+    methods: {
+        emitDates() {
+            if (this.startMonth && this.endMonth) {
+                 //TODO make this 0(1) time complexity
                 const startMonthIndex = this.months.indexOf(this.startMonth) + 1
                 const endMonthIndex = this.months.indexOf(this.endMonth) + 1
                 if (endMonthIndex < startMonthIndex) {
@@ -39,7 +47,7 @@ export default {
                 }
                 this.$emit('update:dateChanged', startMonthIndex, endMonthIndex)
             }
-        } 
+        }
     }
 }
 </script>
