@@ -9,14 +9,30 @@
           outlined
           tile
         >
-            <p class="month__title"> January </p>
-          <p>Energy Produced: 13253553vh</p>
-          <p>Energy Produced: 13253553vh</p>
-          <p>Energy Produced: 13253553vh</p>
-          <p>Energy Produced: 13253553vh</p>
+            <p class="month__title"> {{month.name}} </p>
+          <p>Energy Produced: <span class="month__sub__value"> {{month.energyProduced}} </span> MWh</p>
+          <p>Energy Lost: <span class="month__sub__value"> {{month.energyLost}} </span> MWh</p>
+          <p>Availability: <span :class="month.availability > 97 ? 'text-green': 'text-red'"> {{availabilityToTwoDP}} </span>%</p>
+          <p>Worst Turbine: <span class="month__sub__value"> {{month.worstTurbine}} </span></p>
         </v-card>
       </v-col>
 </template>
+<script>
+export default {
+    props: {
+        month: {
+            required: true,
+            type: Object
+            //TODO Validate Object Keys
+        }
+    },
+    computed: {
+        availabilityToTwoDP() {
+            return this.month.availability.toFixed(2)
+        }
+    }
+}
+</script>
 
 <style lang="scss" scoped>
 .month {
@@ -25,6 +41,17 @@
         text-align: center;
         color: #fff;
     }
+    &__sub__value {
+        color: white;
+    }
+}
+
+.text-green {
+    color: green;
+}
+
+.text-red {
+    color: red;
 }
 </style>
 

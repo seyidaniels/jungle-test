@@ -29,8 +29,13 @@ export default {
     watch: {
         endMonth(value) {
             if (value && this.startMonth) {
-                //Todo make this 0(1) time complexity
-                this.$emit('update:dateChanged', this.months.indexOf(this.startMonth) + 1, this.months.indexOf(this.endMonth) + 1)
+                //TODO make this 0(1) time complexity
+                const startMonthIndex = this.months.indexOf(this.startMonth) + 1
+                const endMonthIndex = this.months.indexOf(this.endMonth) + 1
+                if (endMonthIndex < startMonthIndex) {
+                    alert('End month should not be lesser than start Month')
+                }
+                this.$emit('update:dateChanged', startMonthIndex, endMonthIndex)
             }
         } 
     }

@@ -6,9 +6,11 @@
             <date-display-component @update:dateChanged="fetchDataFromApi"></date-display-component>
         </v-col>
       </v-row>
-      <v-row class='mt-100'>
-        <month-component v-for="i in 12" :key=i></month-component>
+
+      <v-row class='mt-100' v-if="monthsHasData"> 
+          <month-component v-for="(month, index) in monthsData" :month='month' :key='index'></month-component>
       </v-row>
+      <h1 v-if="!monthsHasData">Select Months to return power metrics</h1>
       <v-overlay :value="loading">
       <v-progress-circular
         indeterminate
@@ -24,6 +26,7 @@
 import MonthComponent from './components/MonthComponent';
 import DateDisplayComponent from './components/DateDisplayComponent'
 import axios from 'axios'
+import {getMonthlyData} from '/utils/energyAggregator'
 export default {
   name: 'App',
   components: {
@@ -32,10 +35,14 @@ export default {
   },
   data: () => ({
     loading: false,
+    monthsData: []
   }),
   computed: {
     baseURL () {
       return 'https://interview-availability-api.herokuapp.com/availability-data?'
+    },
+    monthsHasData() {
+      return Object.values(this.monthsData)
     }
   },
   methods: {
@@ -44,7 +51,8 @@ export default {
         const url = this.getActualUrl(startDate, endDate)
         try {
           const response = await axios.get(url) 
-          console.log(response)
+          const monthlyData = getMonthlyData(response.data)
+          Object.assign(this.monthsData, monthlyData)
         }catch (error) {
           alert(error.message)
         }
@@ -65,5 +73,10 @@ export default {
 
 .mt-100 {
   margin-top: 100px;
+}
+
+h1 {
+  text-align: center;
+  color: white;
 }
 </style>
