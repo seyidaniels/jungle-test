@@ -44,6 +44,9 @@ export default {
     &__sub__value {
         color: white;
     }
+    p {
+        color: #AEAEBA;
+    }
 }
 
 .text-green {
