@@ -10,7 +10,7 @@
       <v-row class='mt-100' v-if="monthsHasData"> 
           <month-component v-for="(month, index) in monthsData" :month='month' :key='index'></month-component>
       </v-row>
-      <h1 v-if="!monthsHasData">Select Months to return power metrics</h1>
+      <h1 v-if="!monthsHasData" class='mt-10'>Select Months to return power metrics</h1>
       <v-overlay :value="loading">
       <v-progress-circular
         indeterminate
@@ -42,7 +42,7 @@ export default {
       return 'https://interview-availability-api.herokuapp.com/availability-data?'
     },
     monthsHasData() {
-      return Object.values(this.monthsData)
+      return Object.values(this.monthsData) > 0 
     }
   },
   methods: {
