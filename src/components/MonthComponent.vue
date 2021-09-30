@@ -39,7 +39,7 @@ export default {
     background:#363D4D !important;
     &__title {
         text-align: center;
-        color: #fff;
+        color: #fff !important;
     }
     &__sub__value {
         color: white;
