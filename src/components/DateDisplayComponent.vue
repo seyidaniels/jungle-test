@@ -30,7 +30,7 @@ export default {
         endMonth(value) {
             if (value && this.startMonth) {
                 //Todo make this 0(1) time complexity
-                this.$emit('update:dateChanged', this.months.indexOf(this.startMonth), this.months.indexOf(this.endMonth))
+                this.$emit('update:dateChanged', this.months.indexOf(this.startMonth) + 1, this.months.indexOf(this.endMonth) + 1)
             }
         } 
     }
