@@ -103,7 +103,7 @@ const worstTurbine = (days) => {
         return months
     }, {})
     for (const monthsKey in monthlyData) {
-        months[currentMonth].availability = getAvailability(months[currentMonth].energyProduced, months[currentMonth].energyLost) 
+        monthlyData[monthsKey].availability = getAvailability(monthlyData[monthsKey].energyProduced, monthlyData[monthsKey].energyLost) 
         monthlyData[monthsKey].worstTurbine = worstTurbine(monthlyData[monthsKey].days)
         monthlyData[monthsKey].name = getMonthName(monthsKey)
     }
