@@ -3,10 +3,10 @@
  * 
  * formula is produced / produced + lost
  *
- * @param   {[type]}  produced  [produced description]
- * @param   {[type]}  lost      [lost description]
+ * @param   {Number}  produced  [produced description]
+ * @param   {Number}  lost      [lost description]
  *
- * @return  {[type]}            [return description]
+ * @return  {Number}            [return description]
  */
 const getAvailability = (produced, lost) => {
     return produced / (produced + lost) * 100
@@ -25,6 +25,9 @@ const getAvailability = (produced, lost) => {
 }
 
 
+// test cases, code readability, documentation
+
+
 /**
  * Gets the list of turbines Object for a particular month
  *
@@ -35,8 +38,8 @@ const getAvailability = (produced, lost) => {
         const currentDay = days[i]
 
         if (currentDay.turbine in turbines) {
-            turbines[currentDay.turbine].energyProduced = currentDay.energyProduced
-            turbines[currentDay.turbine].energyLost
+            turbines[currentDay.turbine].energyProduced += currentDay.energyProduced
+            turbines[currentDay.turbine].energyLost += currentDay.energyLost
         }else {
             const newTurbineObject = {
                 energyProduced: currentDay.energyProduced,
@@ -47,6 +50,7 @@ const getAvailability = (produced, lost) => {
     }
     return turbines
 }
+
 
 /**
  * Gets worst Torbine based on a list of days object
@@ -93,15 +97,13 @@ const worstTurbine = (days) => {
                 days: [currentObject],
                 energyProduced: currentObject.energyProduced,
                 energyLost: currentObject.energyLost,
-                
             }
             months[currentMonth] = monthObject
         }
-        months[currentMonth].availability = getAvailability(months[currentMonth].energyProduced, months[currentMonth].energyLost)
         return months
     }, {})
-
     for (const monthsKey in monthlyData) {
+        months[currentMonth].availability = getAvailability(months[currentMonth].energyProduced, months[currentMonth].energyLost) 
         monthlyData[monthsKey].worstTurbine = worstTurbine(monthlyData[monthsKey].days)
         monthlyData[monthsKey].name = getMonthName(monthsKey)
     }
